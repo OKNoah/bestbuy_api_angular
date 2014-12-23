@@ -8,11 +8,11 @@ var app = angular.module('store', ['ngRoute'])
 	$routeProvider
 		.when('/maker/:manufacturer', {
 			controller: 'CategoryController',
-			templateUrl: 'category.html'
+			templateUrl: 'store.html'
 		})
 		.when('/maker/:manufacturer/category/:category', {
 			controller: 'CategoryController',
-			templateUrl: 'category.html'
+			templateUrl: 'store.html'
 		});
 }])
 
