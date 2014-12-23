@@ -1,10 +1,31 @@
 (function ( angular ) {
 
-var app = angular.module('store', ['ngRoute'])
+var app = angular.module('store', ['ngRoute', 'ui.bootstrap'])
 
-.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+.config(['$routeProvider', '$locationProvider', 'ui.bootstrap',function($routeProvider, $locationProvider, $modal) {
 	$locationProvider.hashPrefix('');
+	var scope = [];
 
+	//
+	// CONFIGURES MODAL
+	//
+	$modal
+		.open({
+			templateUrl: 'modal.html',
+			controller: 'CategoryController',
+			resolve: {
+				aValue: function () {
+					return scope.dataToModal;
+				}
+			}
+		})
+		.result.then( function (dataFromModal) {
+			scope.dataFromModal;
+		});
+
+	//
+	// ROUTES THE URLS THE THE CONTROLLERS
+	//
 	$routeProvider
 		.when('/maker/:manufacturer', {
 			controller: 'CategoryController',
