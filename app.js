@@ -23,7 +23,6 @@ var app = angular.module('store', ['ngRoute'])
 	this.offer = [];
 	this.categories = [];
 	this.apiArgs = 'manufacturer=' + this.manufacturer;
-	console.log(this.$routeParams.category);
 	
 	//
 	// BUILD THE SEARCH ARGUMENTS, IF /CATEGORY IS IN URL
@@ -44,10 +43,8 @@ var app = angular.module('store', ['ngRoute'])
 					});
 				}
 			});
-			console.log(data);
 	}).error( function (data, status) {
-		console.log(status);
-		console.log(store.apiArgs);
+		console.log(status + "error");
 	});
 
 }]);
