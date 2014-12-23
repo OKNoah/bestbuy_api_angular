@@ -1,0 +1,23 @@
+<div ng-controller="CategoryController as store">
+
+	<!-- CATEGORY SIDEBAR -->
+
+	<div class="col-lg-12">
+		<div class="col-md-3 well">
+			<ul class="nav nav-stacked nav-pills">
+				<li ng-repeat="category in store.categories"><a href="#/maker/apple">{{ category.name }}</a></li>
+			</ul>
+		</div>
+
+		<div class="col-md-8">
+			<div ng-repeat="offer in store.offers" class="col-sm-12 col-md-6 col-lg-4 well" style="height: 130pt;">
+				<img ng-src="" class="pull-left" />
+				<h3>{{offer.name}}
+				<em class="pull-right">{{offer.salePrice | currency}}</em>
+				{{offer.description}}
+				</h3>
+			</div>
+		</div>
+	</div>
+
+</div>
