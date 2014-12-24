@@ -44,7 +44,7 @@ var app = angular.module('store', ['ngRoute', 'mgcrea.ngStrap', 'ngSanitize'])
 		this.apiArgs = this.apiArgs + '&categoryPath.id=' + this.category;
 	}
 
-	$http.get('http://api.remix.bestbuy.com/v1/products(' + store.apiArgs + ')?format=json&show=categoryPath.name,categoryPath.id,sku,name,salePrice,thumbnailImage,largeFrontImage&apiKey=y7ne8hezdwv8dxa3j8ncgxfn')
+	$http.get('http://api.remix.bestbuy.com/v1/products(' + store.apiArgs + '&largeFrontImage=*)?format=json&show=categoryPath.name,categoryPath.id,sku,name,salePrice,thumbnailImage,largeFrontImage&apiKey=y7ne8hezdwv8dxa3j8ncgxfn')
 	.success(function(data) {
 			store.offers = data.products;
 			store.offers.forEach(function(each){
@@ -55,7 +55,8 @@ var app = angular.module('store', ['ngRoute', 'mgcrea.ngStrap', 'ngSanitize'])
 					});
 				}
 			});
-	}).error( function (data, status) {
+	})
+	.error( function (data, status) {
 		console.log(status + "error");
 	});
 
