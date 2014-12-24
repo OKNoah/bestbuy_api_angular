@@ -23,9 +23,9 @@
 		
 
 		<div class="col-md-8">
-			<div ng-repeat="offer in store.offers" class="col-xs-12 col-sm-6 col-lg-4 well" style="min-height: 150pt;">
+			<div ng-repeat="offer in store.offers" class="col-xs-12 col-sm-6 col-lg-4 well" style="min-height: 150pt;" ng-click='' data-content-template="modal.html" bs-modal="modal">
 				<div class="media">
-					<a href="#" class="media-left pull-left">
+					<a class="media-left pull-left">
 						<img ng-src="{{ offer.thumbnailImage }}" class="img-thumbnail pull-left" />
 					</a>
 				</div>
@@ -33,6 +33,7 @@
 				<em class="pull-right">{{offer.salePrice | currency}}</em>
 				{{offer.description}}
 				</h3>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -1,27 +1,11 @@
 (function ( angular ) {
+'use strict';
 
-var app = angular.module('store', ['ngRoute', 'ui.bootstrap'])
+var app = angular.module('store', ['ngRoute', 'mgcrea.ngStrap', 'ngSanitize'])
 
-.config(['$routeProvider', '$locationProvider', 'ui.bootstrap',function($routeProvider, $locationProvider, $modal) {
+.config(['$routeProvider', '$locationProvider', '$modalProvider', function($routeProvider, $locationProvider, $modalProvider, $scope) {
+	
 	$locationProvider.hashPrefix('');
-	var scope = [];
-
-	//
-	// CONFIGURES MODAL
-	//
-	$modal
-		.open({
-			templateUrl: 'modal.html',
-			controller: 'CategoryController',
-			resolve: {
-				aValue: function () {
-					return scope.dataToModal;
-				}
-			}
-		})
-		.result.then( function (dataFromModal) {
-			scope.dataFromModal;
-		});
 
 	//
 	// ROUTES THE URLS THE THE CONTROLLERS
@@ -37,7 +21,7 @@ var app = angular.module('store', ['ngRoute', 'ui.bootstrap'])
 		});
 }])
 
-.controller('CategoryController', [ '$http', '$routeParams', '$route', '$location', function($http, $routeParams, $route, $location){
+.controller('CategoryController', [ '$http', '$routeParams', '$route', '$location', '$modal', '$scope', '$sanitize', function($http, $routeParams, $route, $location, $modal, $scope, $sanitize){
 	var store = this;
 	this.$routeParams = $routeParams;
 	this.manufacturer = $routeParams.manufacturer;
@@ -53,7 +37,7 @@ var app = angular.module('store', ['ngRoute', 'ui.bootstrap'])
 		this.apiArgs = this.apiArgs + '&categoryPath.id=' + this.category;
 	}
 
-	$http.get('http://api.remix.bestbuy.com/v1/products(' + store.apiArgs + ')?format=json&show=categoryPath.name,categoryPath.id,sku,name,salePrice,thumbnailImage&apiKey=y7ne8hezdwv8dxa3j8ncgxfn')
+	$http.get('http://api.remix.bestbuy.com/v1/products(' + store.apiArgs + ')?format=json&show=categoryPath.name,categoryPath.id,sku,name,salePrice,thumbnailImage,largeFrontImage&apiKey=y7ne8hezdwv8dxa3j8ncgxfn')
 	.success(function(data) {
 			store.offers = data.products;
 			store.offers.forEach(function(each){
@@ -67,6 +51,20 @@ var app = angular.module('store', ['ngRoute', 'ui.bootstrap'])
 	}).error( function (data, status) {
 		console.log(status + "error");
 	});
+
+
+	//
+	// CONTROLS OFFER DETAILS POP-UP
+	//
+	$scope.modal = {
+		html: true
+	};
+
+	// var offerDetailsHtml = $modal({title: 'my title'});
+
+	// $scope.offerDetailsHtml = {title: 'fart', contentTemplate: 'modal.html'};
+
+	// $scope.modal = {title: 'this ', content: 'CategoryController', show: true};
 
 }]);
 
