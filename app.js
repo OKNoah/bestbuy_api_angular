@@ -9,6 +9,8 @@ var app = angular.module('store', ['ngRoute', 'mgcrea.ngStrap', 'ngSanitize'])
 	// ALLOW THE CROSS-SITE API REQUESTS
 	//
 	$httpProvider.defaults.useXDomain = true;
+	delete $httpProvider.defaults.headers.common['X-Requested-With'];
+	$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 	
 	$locationProvider.hashPrefix('');
 
