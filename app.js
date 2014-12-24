@@ -3,7 +3,12 @@
 
 var app = angular.module('store', ['ngRoute', 'mgcrea.ngStrap', 'ngSanitize'])
 
-.config(['$routeProvider', '$locationProvider', '$modalProvider', function($routeProvider, $locationProvider, $modalProvider, $scope) {
+.config(['$routeProvider', '$locationProvider', '$modalProvider', '$httpProvider', function($routeProvider, $locationProvider, $modalProvider, $httpProvider) {
+
+	//
+	// ALLOW THE CROSS-SITE API REQUESTS
+	//
+	$httpProvider.defaults.useXDomain = true;
 	
 	$locationProvider.hashPrefix('');
 
